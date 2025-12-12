@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morning Knowledge - Dragos' Daily Brief</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #222;
+            --text-primary: #e8e8e8;
+            --text-secondary: #a8a8a8;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --border: #333;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+        }
+
+        .header {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .meta {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .section-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .section-header .count {
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            transition: all 0.2s;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+            flex: 1;
+        }
+
+        .card-title:hover {
+            color: var(--accent);
+        }
+
+        .relevance-badge {
+            background: var(--success);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.75rem;
+        }
+
+        .card-summary {
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
+
+        /* Moodboard Grid */
+        .moodboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .moodboard-item {
+            position: relative;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .moodboard-item:hover {
+            transform: scale(1.02);
+        }
+
+        .moodboard-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .moodboard-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 1rem;
+            color: white;
+            font-size: 0.875rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .moodboard-item:hover .moodboard-overlay {
+            opacity: 1;
+        }
+
+        /* Running Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tr:hover {
+            background: var(--bg-secondary);
+        }
+
+        /* Video Embed */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-state p {
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 1.25rem;
+            }
+
+            .card {
+                padding: 1rem;
+            }
+
+            .moodboard-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 0.75rem;
+            }
+
+            .comparison-table {
+                font-size: 0.875rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .loading {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>☀️ Morning Knowledge</h1>
+        <div class="meta">
+            <span id="current-date">Loading...</span>
+            <span>•</span>
+            <span id="items-count">0 items today</span>
+            <span>•</span>
+            <span>Last updated: <span id="last-update">Never</span></span>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- AI & Design Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>🤖 AI & Design-to-Code</h2>
+                <span class="count" id="ai-count">0</span>
+            </div>
+            <div id="ai-content">
+                <!-- Dynamic content loaded here -->
+                <div class="empty-state">
+                    <p>💫 Your AI & design news will appear here at 8 AM</p>
+                    <p style="font-size: 0.875rem; margin-top: 0.5rem;">Articles are auto-filtered by Claude for relevance (7+ score only)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design Inspiration Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>✨ Design Inspiration</h2>
+                <span class="count" id="design-count">0</span>
+            </div>
+            <div id="design-content">
+                <div class="empty-state">
+                    <p>🎨 Case studies and design examples coming soon</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Moodboard Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>🖼️ Daily Moodboard</h2>
+                <span class="count" id="moodboard-count">0</span>
+            </div>
+            <div id="moodboard-content" class="moodboard-grid">
+                <div class="empty-state" style="grid-column: 1/-1;">
+                    <p>📸 Visual inspiration grid loads daily</p>
+                    <p style="font-size: 0.875rem; margin-top: 0.5rem;">70% Digital Design • 30% Architecture & Art</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Running Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>🏃 Running News & Gear</h2>
+                <span class="count" id="running-count">0</span>
+            </div>
+            
+            <!-- Latest Kofuzi Video -->
+            <div style="margin-bottom: 2rem;">
+                <h3 style="font-size: 1rem; margin-bottom: 1rem; color: var(--text-secondary);">Latest from Kofuzi</h3>
+                <div id="kofuzi-video">
+                    <div class="empty-state">
+                        <p>📺 Latest Kofuzi video embed will appear here</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gear Reviews -->
+            <div style="margin-bottom: 2rem;">
+                <h3 style="font-size: 1rem; margin-bottom: 1rem; color: var(--text-secondary);">Latest Reviews</h3>
+                <div id="running-content">
+                    <div class="empty-state">
+                        <p>👟 Gear reviews and running news</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shoe Comparison Table -->
+            <div>
+                <h3 style="font-size: 1rem; margin-bottom: 1rem; color: var(--text-secondary);">Shoe Comparison</h3>
+                <div style="overflow-x: auto;">
+                    <table class="comparison-table" id="shoe-comparison">
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Type</th>
+                                <th>Price</th>
+                                <th>Weight</th>
+                                <th>Stack</th>
+                                <th>Drop</th>
+                                <th>Rating</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="8" style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+                                    Shoe comparisons will appear as reviews are added
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Set current date
+        const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', dateOptions);
+
+        // This will be populated by Make.com automation
+        // Sample data structure for reference:
+        const sampleData = {
+            lastUpdate: '2024-12-13T08:00:00Z',
+            ai: [
+                {
+                    title: 'Example: Figma announces new AI features',
+                    url: 'https://example.com',
+                    summary: 'Figma has introduced new AI-powered design tools. These features aim to speed up design-to-code workflows.',
+                    source: 'Figma Blog',
+                    relevance: 9,
+                    date: '2024-12-13'
+                }
+            ],
+            design: [],
+            moodboard: [],
+            running: []
+        };
+
+        // Function to load data from external JSON (generated by Make.com)
+        async function loadData() {
+            try {
+                const response = await fetch('data.json');
+                const data = await response.json();
+                renderContent(data);
+            } catch (error) {
+                console.log('No data file yet - waiting for automation to run');
+            }
+        }
+
+        function renderContent(data) {
+            // Update counts
+            document.getElementById('items-count').textContent = 
+                `${(data.ai?.length || 0) + (data.design?.length || 0) + (data.moodboard?.length || 0) + (data.running?.length || 0)} items today`;
+            document.getElementById('last-update').textContent = 
+                new Date(data.lastUpdate).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+            // Render AI content
+            if (data.ai && data.ai.length > 0) {
+                document.getElementById('ai-count').textContent = data.ai.length;
+                document.getElementById('ai-content').innerHTML = data.ai.map(item => `
+                    <div class="card">
+                        <div class="card-header">
+                            <a href="${item.url}" class="card-title" target="_blank">${item.title}</a>
+                            <span class="relevance-badge">${item.relevance}/10</span>
+                        </div>
+                        <p class="card-summary">${item.summary}</p>
+                        <div class="card-meta">
+                            <span>📰 ${item.source}</span>
+                            <span>•</span>
+                            <span>📅 ${new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="${item.url}" target="_blank" class="btn btn-primary">Read Article</a>
+                            <button class="btn" onclick="saveForLater('${item.title}', '${item.url}')">💾 Save</button>
+                            <button class="btn" onclick="archive('${item.id}')">✓ Done</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Render design content
+            if (data.design && data.design.length > 0) {
+                document.getElementById('design-count').textContent = data.design.length;
+                document.getElementById('design-content').innerHTML = data.design.map(item => `
+                    <div class="card">
+                        <div class="card-header">
+                            <a href="${item.url}" class="card-title" target="_blank">${item.title}</a>
+                        </div>
+                        <p class="card-summary">${item.summary}</p>
+                        <div class="card-meta">
+                            <span>🎨 ${item.category}</span>
+                            <span>•</span>
+                            <span>${item.source}</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="${item.url}" target="_blank" class="btn btn-primary">View Case Study</a>
+                            <button class="btn" onclick="addToPortfolio('${item.id}')">📁 Portfolio</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Render moodboard
+            if (data.moodboard && data.moodboard.length > 0) {
+                document.getElementById('moodboard-count').textContent = data.moodboard.length;
+                document.getElementById('moodboard-content').innerHTML = data.moodboard.map(item => `
+                    <div class="moodboard-item" onclick="window.open('${item.url}', '_blank')">
+                        <img src="${item.image}" alt="${item.title}" loading="lazy">
+                        <div class="moodboard-overlay">
+                            <strong>${item.category}</strong><br>
+                            ${item.source}
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Render running content
+            if (data.running && data.running.length > 0) {
+                document.getElementById('running-count').textContent = data.running.length;
+                
+                // Latest Kofuzi video
+                if (data.latestKofuziVideo) {
+                    document.getElementById('kofuzi-video').innerHTML = `
+                        <div class="video-container">
+                            <iframe src="${data.latestKofuziVideo}" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    `;
+                }
+
+                // Running news/reviews
+                document.getElementById('running-content').innerHTML = data.running.map(item => `
+                    <div class="card">
+                        <div class="card-header">
+                            <a href="${item.url}" class="card-title" target="_blank">${item.title}</a>
+                        </div>
+                        <p class="card-summary">${item.summary}</p>
+                        <div class="card-meta">
+                            <span>${item.type}</span>
+                            <span>•</span>
+                            <span>${item.source}</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="${item.url}" target="_blank" class="btn btn-primary">Read Review</a>
+                            ${item.isShoe ? `<button class="btn" onclick="addToComparison('${item.id}')">➕ Compare</button>` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Render shoe comparison table
+            if (data.shoeComparison && data.shoeComparison.length > 0) {
+                document.querySelector('#shoe-comparison tbody').innerHTML = data.shoeComparison.map(shoe => `
+                    <tr>
+                        <td><strong>${shoe.model}</strong></td>
+                        <td>${shoe.type}</td>
+                        <td>${shoe.price}</td>
+                        <td>${shoe.weight}g</td>
+                        <td>${shoe.stack}mm</td>
+                        <td>${shoe.drop}mm</td>
+                        <td>${shoe.rating}/10</td>
+                        <td><a href="${shoe.reviewUrl}" target="_blank" class="btn">Review</a></td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        // Action handlers (these will integrate with Airtable via Make.com webhooks)
+        function saveForLater(title, url) {
+            console.log('Saving for later:', title);
+            // TODO: Make.com webhook to add to Airtable "Reading List"
+            alert('Saved to Reading List! ✓');
+        }
+
+        function archive(id) {
+            console.log('Archiving:', id);
+            // TODO: Hide from dashboard
+            alert('Archived! ✓');
+        }
+
+        function addToPortfolio(id) {
+            console.log('Adding to portfolio inspiration:', id);
+            // TODO: Make.com webhook to add to Airtable "Portfolio Inspiration"
+            alert('Added to Portfolio Inspiration! ✓');
+        }
+
+        function addToComparison(id) {
+            console.log('Adding to comparison:', id);
+            // TODO: Make.com webhook to add to comparison table
+            alert('Added to Shoe Comparison! ✓');
+        }
+
+        // Load data on page load
+        loadData();
+
+        // Refresh every 30 minutes
+        setInterval(loadData, 30 * 60 * 1000);
+    </script>
+</body>
+</html>

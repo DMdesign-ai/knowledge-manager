@@ -1,0 +1,190 @@
+{
+  "lastUpdate": "2024-12-13T08:00:00Z",
+  "ai": [
+    {
+      "id": "ai-001",
+      "title": "Figma Introduces AI-Powered Component Generation",
+      "url": "https://www.figma.com/blog/ai-component-generation/",
+      "summary": "Figma announces new AI features that automatically generate design system components from descriptions. The tool integrates with existing design systems and maintains brand consistency.",
+      "source": "Figma Blog",
+      "relevance": 9,
+      "date": "2024-12-12",
+      "category": "Design-to-Code"
+    },
+    {
+      "id": "ai-002",
+      "title": "Model Context Protocol: Building AI Agents with Anthropic",
+      "url": "https://www.anthropic.com/news/model-context-protocol",
+      "summary": "Anthropic releases MCP, an open protocol for connecting AI assistants to data sources and tools. Enables more powerful, context-aware AI workflows for developers.",
+      "source": "Anthropic",
+      "relevance": 8,
+      "date": "2024-12-11",
+      "category": "AI"
+    },
+    {
+      "id": "ai-003",
+      "title": "Swiss Design Meets AI: New Tools for Minimalist Interfaces",
+      "url": "https://medium.com/ux-design/swiss-ai-design",
+      "summary": "Exploring how Swiss design principles of clarity and grid systems translate to AI-powered design tools. Case studies from Geneva-based studios.",
+      "source": "UX Collective",
+      "relevance": 8,
+      "date": "2024-12-10",
+      "category": "Swiss Design"
+    }
+  ],
+  "design": [
+    {
+      "id": "design-001",
+      "title": "Revolut's New Payment Flow: A UX Case Study",
+      "url": "https://mobbin.com/screens/revolut-payment-flow",
+      "summary": "Deep dive into how Revolut simplified their payment confirmation from 5 steps to 2, increasing conversion by 34%. Includes user testing insights and iteration process.",
+      "source": "Mobbin",
+      "category": "Fintech",
+      "type": "Case Study"
+    },
+    {
+      "id": "design-002",
+      "title": "TWINT Competitor Analysis: N26 Mobile App Redesign",
+      "url": "https://www.behance.net/gallery/n26-redesign",
+      "summary": "Complete mobile banking app redesign focusing on speed and accessibility. New card-based navigation and instant payment features.",
+      "source": "Behance",
+      "category": "Payment UX",
+      "type": "Case Study"
+    },
+    {
+      "id": "design-003",
+      "title": "Design System Components: Interactive States Done Right",
+      "url": "https://www.smashingmagazine.com/2024/12/design-system-states/",
+      "summary": "Comprehensive guide to designing micro-interactions for button states, loading indicators, and error messages in design systems.",
+      "source": "Smashing Magazine",
+      "category": "Design Systems",
+      "type": "Tutorial"
+    }
+  ],
+  "moodboard": [
+    {
+      "id": "mood-001",
+      "title": "Minimalist Dashboard with Swiss Typography",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
+      "url": "https://minimal.gallery/dashboard-swiss",
+      "category": "Digital Design",
+      "source": "Minimal Gallery"
+    },
+    {
+      "id": "mood-002",
+      "title": "Brutalist E-commerce Layout",
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800",
+      "url": "https://brutalistwebsites.com/example-001",
+      "category": "Web Design",
+      "source": "Brutalist Websites"
+    },
+    {
+      "id": "mood-003",
+      "title": "Contemporary Architecture: Zurich Studio",
+      "image": "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800",
+      "url": "https://archdaily.com/zurich-studio",
+      "category": "Architecture",
+      "source": "ArchDaily"
+    },
+    {
+      "id": "mood-004",
+      "title": "Colorful Data Visualization",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
+      "url": "https://dribbble.com/data-viz-example",
+      "category": "UI",
+      "source": "Dribbble"
+    },
+    {
+      "id": "mood-005",
+      "title": "Typographic Poster Design",
+      "image": "https://images.unsplash.com/photo-1499678329028-101435549a4e?w=800",
+      "url": "https://typewolf.com/poster-2024",
+      "category": "Typography",
+      "source": "Typewolf"
+    },
+    {
+      "id": "mood-006",
+      "title": "Modern Art Installation",
+      "image": "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=800",
+      "url": "https://colossal.com/installation-2024",
+      "category": "Art",
+      "source": "Colossal"
+    }
+  ],
+  "running": [
+    {
+      "id": "run-001",
+      "title": "Asics Superblast 2 Review - Better Than Version 1?",
+      "url": "https://youtube.com/watch?v=example",
+      "summary": "Kofuzi reviews the updated Superblast 2. Lighter at 235g, better energy return with FF Blast Plus Eco foam. Great for tempo runs and long runs up to marathon distance.",
+      "source": "Kofuzi",
+      "type": "👟 Shoe Review",
+      "isShoe": true
+    },
+    {
+      "id": "run-002",
+      "title": "Posterior Tibial Tendonitis: Recovery Protocol",
+      "url": "https://www.doctorsofrunning.com/ptt-recovery",
+      "summary": "Evidence-based approach to PT tendonitis recovery. Includes strengthening exercises, return-to-run progression, and when to seek medical help.",
+      "source": "Doctors of Running",
+      "type": "📚 Training Article",
+      "isShoe": false
+    },
+    {
+      "id": "run-003",
+      "title": "Hoka Mach 6 - Road Racing Update",
+      "url": "https://believeintherun.com/hoka-mach-6",
+      "summary": "Updated with lighter ProFly midsole and early-stage Meta-Rocker. Best for 5K-Half Marathon racing. Not recommended for marathon distance.",
+      "source": "Believe in the Run",
+      "type": "👟 Shoe Review",
+      "isShoe": true
+    }
+  ],
+  "latestKofuziVideo": "https://www.youtube.com/embed/example",
+  "shoeComparison": [
+    {
+      "model": "Asics Superblast 2",
+      "brand": "Asics",
+      "type": "Daily Trainer",
+      "price": "$200",
+      "weight": "235g",
+      "stack": "41mm",
+      "drop": "8mm",
+      "rating": "8.5",
+      "reviewUrl": "https://youtube.com/kofuzi/superblast2"
+    },
+    {
+      "model": "Hoka Mach 6",
+      "brand": "Hoka",
+      "type": "Race Day",
+      "price": "$165",
+      "weight": "226g",
+      "stack": "34mm",
+      "drop": "5mm",
+      "rating": "8.0",
+      "reviewUrl": "https://believeintherun.com/mach6"
+    },
+    {
+      "model": "Nike Vaporfly 3",
+      "brand": "Nike",
+      "type": "Race Day",
+      "price": "$260",
+      "weight": "210g",
+      "stack": "39mm",
+      "drop": "8mm",
+      "rating": "9.5",
+      "reviewUrl": "https://doctorsofrunning.com/vaporfly3"
+    },
+    {
+      "model": "Saucony Endorphin Speed 4",
+      "brand": "Saucony",
+      "type": "Tempo",
+      "price": "$180",
+      "weight": "240g",
+      "stack": "36mm",
+      "drop": "8mm",
+      "rating": "9.0",
+      "reviewUrl": "https://kofuzi.com/endorphin-speed-4"
+    }
+  ]
+}
